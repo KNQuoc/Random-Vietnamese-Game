@@ -3,7 +3,7 @@
 #include<iomanip>
 
 const int NUM_ROWS = 2;
-const int NUM_PITS = 5;
+const int NUM_PITS = 6;
 
 //Initialize the board with via vectors and its most basic functions
 class board {
@@ -17,11 +17,13 @@ public:
 	
 	void display(){
 		for (int pit = 0; pit < NUM_PITS; ++pit) {
+			pits[0][NUM_PITS - 1] = 10;
 			std::cout << "|" << pits[0][pit] << "|";
 		}
 		std::cout << std::endl;
-		std::cout << std::setw(15) << std::setfill(static_cast<char>(196)) << static_cast<char>(196) << std::endl;
+		std::cout << std::setw(19) << std::setfill(static_cast<char>(196)) << static_cast<char>(196) << std::endl;
 		for (int pit = NUM_PITS - 1; pit >= 0; --pit) {
+			pits[1][NUM_PITS - 1] = 10;
 			std::cout << "|" << pits[1][pit] << "|";
 		}
 		std::cout << std::endl;
