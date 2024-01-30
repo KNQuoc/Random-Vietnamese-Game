@@ -1,5 +1,5 @@
 # Random-Vietnamese-Game
-Welcome! IF you have read this, you have come to the degenerate place of Kien Quoc Ngo (the correct legal name in the US) where he creates games from his past as best he can!
+Welcome! If you have come and read this, you have come to the degenerate place of Kien Quoc Ngo (the correct legal name in the US) where he creates games from his past as best he can!
 
 For context: Hi! I'm Quoc, a BGSU freshman having fun tinkering with programming and trying my best to make it fun (and stressful) for me and my peers (few teachers are involved)!
 I hope to show my capabilities and improvments day after day and prove that I am not your average Joe Shmoe sitting on a chair moderating a Discord server :D
