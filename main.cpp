@@ -9,10 +9,12 @@ const int NUM_PITS = 6;
 class board {
 private:
 	std::vector < std::vector<std::pair<int, bool>> > pits;
+	int currentPlayer;
 
 public:
 	board(int numSeedsPerPit) {
 		pits.assign(NUM_ROWS, std::vector<std::pair<int, bool>>(NUM_PITS, { numSeedsPerPit, false }));
+		currentPlayer = 0;
 	}
 	int getSeeds(int row, int pit) {
 		return pits[row][pit].first;
@@ -50,6 +52,193 @@ public:
 			}
 		}
 		std::cout << std::endl;
+	}
+	void distributeSeeds(int row, int pit) {
+		int seedsOnHand = 0;
+		int seeds = pits[row][pit].first;
+		std::string side;
+
+		if (currentPlayer = 0) {
+			seedsOnHand = seeds;
+			pits[0][pit].first = 0;
+			if (side == "left") {
+				for (int i = pit + 1; i < NUM_PITS; ++i) {
+					++pits[0][i].first;
+					--seedsOnHand;
+					if (seedsOnHand == 0) {
+						if (pits[0][i + 1].first > 0) {
+							seedsOnHand = pits[0][i + 1].first;
+							pits[0][i + 1].first = 0;
+							i = i + 2;
+							continue;
+						}
+						else {break;}
+					}
+				}
+				while (seedsOnHand > 0) {
+					for (int i = 0; i < NUM_PITS; ++i) {
+						++pits[1][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[1][i + 1].first > 0) {
+								seedsOnHand = pits[1][i - 1].first;
+								pits[1][i + 1].first = 0;
+								i = i + 2;
+								continue;
+							}
+							else {break;}
+						}
+					}
+					for (int i = 0; i < NUM_PITS; ++i) {
+						++pits[0][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[0][i + 1].first > 0) {
+								seedsOnHand = pits[0][i + 1].first;
+								pits[0][i + 1].first = 0;
+								i = i + 2;
+								continue;
+							}
+							else {break;}
+						}
+					}
+				}
+			}
+			if (side == "right") {
+				for (int i = pit - 1; i >= 0; --i) {
+					++pits[0][i].first;
+					--seedsOnHand;
+					if (seedsOnHand == 0) {
+						if (pits[1][i + 1].first > 0) {
+							seedsOnHand = pits[0][i + 1].first;
+							pits[1][i + 1].first = 0;
+							i = i + 2;
+							continue;
+						}
+						else {break;}
+					}
+				}
+				while (seedsOnHand > 0) {
+					for (int i = NUM_PITS - 1; i >= 0; --i) {
+						++pits[1][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[1][i + 1].first > 0) {
+								seedsOnHand = pits[0][i + 1].first;
+								pits[1][i + 1].first = 0;
+								i = i + 2;
+								continue;
+							}
+							else {break;}
+						}
+					}
+					for (int i = NUM_PITS - 1; i >= 0; --i) {
+						++pits[0][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[1][i + 1].first > 0) {
+								seedsOnHand = pits[0][i + 1].first;
+								pits[1][i + 1].first = 0;
+								i = i + 2;
+								continue;
+							}
+							else {break;}
+						}
+					}
+				}
+			}
+		}
+		if (currentPlayer = 1) {
+			seedsOnHand = seeds;
+			pits[1][pit].first = 0;
+			if (side == "left") {
+				for (int i = pit + 1; i < NUM_PITS; ++i) {
+					++pits[1][i].first;
+					--seedsOnHand;
+					if (seedsOnHand == 0) {
+						if (pits[1][i + 1].first > 0) {
+							seedsOnHand = pits[0][i + 1].first;
+							pits[1][i + 1].first = 0;
+							i = i + 2;
+							continue;
+						}
+						else { break; }
+					}
+				}
+				while (seedsOnHand > 0) {
+					for (int i = 0; i < NUM_PITS; ++i) {
+						++pits[0][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[0][i + 1].first > 0) {
+								seedsOnHand = pits[1][i + 1].first;
+								pits[0][i + 1].first = 0;
+								i = i + 2;
+								continue;
+							}
+							else { break; }
+						}
+					}
+					for (int i = 0; i < NUM_PITS; ++i) {
+						++pits[1][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[1][i + 1].first > 0) {
+								seedsOnHand = pits[0][i + 1].first;
+								pits[1][i + 1].first = 0;
+								i = i + 2;
+								continue;
+							}
+							else { break; }
+						}
+					}
+				}
+			}
+			if (side == "right") {
+				for (int i = pit - 1; i >= 0; --i) {
+					++pits[1][i].first;
+					--seedsOnHand;
+					if (seedsOnHand == 0) {
+						if (pits[1][i - 1].first > 0) {
+							seedsOnHand = pits[0][i - 1].first;
+							pits[1][i - 1].first = 0;
+							i = i - 2;
+							continue;
+						}
+						else { break; }
+					}
+				}
+			}
+				while (seedsOnHand > 0) {
+					for (int i = NUM_PITS - 1; i >= 0; --i) {
+						++pits[0][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[0][i - 1].first > 0) {
+								seedsOnHand = pits[0][i - 1].first;
+								pits[0][i - 1].first = 0;
+								i = i - 2;
+								continue;
+							}
+							else {break;}
+						}
+					}
+					for (int i = NUM_PITS - 1; i >= 0; --i) {
+						++pits[1][i].first;
+						--seedsOnHand;
+						if (seedsOnHand == 0) {
+							if (pits[1][i - 1].first > 0) {
+								seedsOnHand = pits[0][i - 1].first;
+								pits[1][i - 1].first = 0;
+								i = i - 2;
+								continue;
+							}
+							else { break; }
+						}
+					}
+				}
+			}
+
 	}
 };
 	// Testing, currently only shows how the board can look like
