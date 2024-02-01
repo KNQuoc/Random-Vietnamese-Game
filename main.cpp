@@ -162,7 +162,7 @@ public:
 							i = i + 2;
 							continue;
 						}
-						else { break; }
+						else {break;}
 					}
 				}
 				while (seedsOnHand > 0) {
@@ -176,7 +176,7 @@ public:
 								i = i + 2;
 								continue;
 							}
-							else { break; }
+							else {break;}
 						}
 					}
 					for (int i = 0; i < NUM_PITS; ++i) {
@@ -189,7 +189,7 @@ public:
 								i = i + 2;
 								continue;
 							}
-							else { break; }
+							else {break;}
 						}
 					}
 				}
@@ -205,40 +205,40 @@ public:
 							i = i - 2;
 							continue;
 						}
-						else { break; }
+						else {break;}
 					}
 				}
 			}
-				while (seedsOnHand > 0) {
-					for (int i = NUM_PITS - 1; i >= 0; --i) {
-						++pits[0][i].first;
-						--seedsOnHand;
-						if (seedsOnHand == 0) {
-							if (pits[0][i - 1].first > 0) {
-								seedsOnHand = pits[0][i - 1].first;
-								pits[0][i - 1].first = 0;
-								i = i - 2;
-								continue;
-							}
-							else {break;}
+			while (seedsOnHand > 0) {
+				for (int i = NUM_PITS - 1; i >= 0; --i) {
+					++pits[0][i].first;
+					--seedsOnHand;
+					if (seedsOnHand == 0) {
+						if (pits[0][i - 1].first > 0) {
+							seedsOnHand = pits[0][i - 1].first;
+							pits[0][i - 1].first = 0;
+							i = i - 2;
+							continue;
 						}
+						else {break;}
 					}
-					for (int i = NUM_PITS - 1; i >= 0; --i) {
-						++pits[1][i].first;
-						--seedsOnHand;
-						if (seedsOnHand == 0) {
-							if (pits[1][i - 1].first > 0) {
-								seedsOnHand = pits[0][i - 1].first;
-								pits[1][i - 1].first = 0;
-								i = i - 2;
-								continue;
-							}
-							else { break; }
+				}
+				for (int i = NUM_PITS - 1; i >= 0; --i) {
+					++pits[1][i].first;
+					--seedsOnHand;
+					if (seedsOnHand == 0) {
+						if (pits[1][i - 1].first > 0) {
+							seedsOnHand = pits[0][i - 1].first;
+							pits[1][i - 1].first = 0;
+							i = i - 2;
+							continue;
 						}
+						else {break;}
 					}
 				}
 			}
-
+		}
+		currentPlayer = (currentPlayer + 1) % 2;
 	}
 };
 	// Testing, currently only shows how the board can look like
