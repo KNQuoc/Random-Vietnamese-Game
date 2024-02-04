@@ -58,7 +58,7 @@ public:
 		int seeds = pits[row][pit].first;
 		std::string side;
 
-		if (currentPlayer = 0) {
+		if (currentPlayer == 0) {
 			seedsOnHand = seeds;
 			pits[0][pit].first = 0;
 			if (side == "left") {
@@ -148,7 +148,7 @@ public:
 				}
 			}
 		}
-		if (currentPlayer = 1) {
+		if (currentPlayer == 1) {
 			seedsOnHand = seeds;
 			pits[1][pit].first = 0;
 			if (side == "left") {
@@ -240,17 +240,32 @@ public:
 		}
 		currentPlayer = (currentPlayer + 1) % 2;
 	}
+	void captureSeeds(int row, int pit) {
+		if (currentPlayer == 0) {
+			if (pits[0][pit].first == 1 && pits[1][pit].first > 0) {
+				pits[0][pit].first = 0;
+				pits[1][pit].first = 0;
+				pits[0][NUM_PITS - 1].first += pits[1][NUM_PITS - 1].first;
+				pits[1][NUM_PITS - 1].first = 0;
+			}
+		}
+		if (currentPlayer == 1) {
+			if (pits[1][pit].first == 1 && pits[0][pit].first > 0) {
+				pits[1][pit].first = 0;
+				pits[0][pit].first = 0;
+				pits[1][NUM_PITS - 1].first += pits[0][NUM_PITS - 1].first;
+				pits[0][NUM_PITS - 1].first = 0;
+			}
+		}
+	}
+
 };
 	// Testing, currently only shows how the board can look like
 int main() {
 	board board(5);
 	board.setBigSeed(0, 0);
 	board.setBigSeed(1, 0);
-	//int x, y;
-	//std::cin >> x;
-	//std::cin >> y;
-	//int seedsInPit = board.getSeeds(x, y);
-	//std::cout << "Seeds in pos (" << x << "," << y << ") is: " << seedsInPit << std::endl;
+	
 
 	std::cout << "board looks like:" << std::endl;
 	board.display();
