@@ -265,8 +265,15 @@ int main() {
 	board board(5);
 	board.setBigSeed(0, 0);
 	board.setBigSeed(1, 0);
-	
-
+	while (true)
+	{
+		board.display();
+		int row, pit;
+		std::cout << "Enter row and pit: ";
+		std::cin >> row >> pit;
+		board.distributeSeeds(row, pit);
+		board.captureSeeds(row, pit);
+	}
 	std::cout << "board looks like:" << std::endl;
 	board.display();
 
